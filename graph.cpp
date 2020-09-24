@@ -16,6 +16,7 @@ public:
   const int v(void) {return verts;}
   int e(void) {return edges;}
   int adjacent(int x, int y) {return conn_matrix[x][y];}
+  void add(int x, int y, int e) {conn_matrix[x][y] = conn_matrix[y][x] = e;}
 
 
 private:
