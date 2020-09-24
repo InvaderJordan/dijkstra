@@ -2,6 +2,8 @@
 #include <vector>
 #include <ctime>
 
+#include "proxqueue.h"
+
 using namespace std;
 
 class Graph {
@@ -15,8 +17,9 @@ public:
 
   const int v(void) {return verts;}
   int e(void) {return edges;}
-  int adjacent(int x, int y) {return conn_matrix[x][y];}
-  void add(int x, int y, int e) {conn_matrix[x][y] = conn_matrix[y][x] = e;}
+  int get_edge(int x, int y) {return conn_matrix[x][y];}
+  void add_edge(int x, int y, int e) {conn_matrix[x][y] = conn_matrix[y][x] = e;}
+  void delete_edge(int x, int y) {conn_matrix[x][y] = conn_matrix[y][x] = 0;}
 
 
 private:
