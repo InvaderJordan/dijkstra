@@ -5,19 +5,14 @@ public:
   Edge(int _x, int _y, int edge=0):x(_x),y(_y),val(edge) {}
   ~Edge() {}
 
-  int getVal(void) const {return val;}
+  inline int getVal(void) const {return val;}
+  inline int getX(void) const {return x;}
+  inline int getY(void) const {return y;}
 
 protected:
   int x;
   int y;
   int val;
-};
-
-class Compare {
-public:
-  bool operator() (const Edge& e1, const Edge& e2) {
-    return e1.getVal() > e2.getVal();
-  }
 };
 
 class ProxQueue {
@@ -26,16 +21,47 @@ public:
   ~ProxQueue() {}
 
   void insert(Edge e) {
-    pq.push(e);
+    edges.push_back(e);
   }
 
   Edge minPriority(void) {
-    Edge e = pq.top();
-    pq.pop();
-    return e;
+    int min_idx = get_min_idx();
+    Edge min_edge = edges[min_idx];
+    edges.erase(edges.begin() + min_idx);
+    return min_edge;
+  }
+
+  bool contains(Edge e) {
+    for (auto itr : edges) {
+      if (itr.getX() == e.getX() && itr.getY() == e.getY()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  Edge top(void) {
+    int idx = get_min_idx();
+    return edges[idx];
+  }
+
+  int size(void) {
+    return edges.size();
   }
 
 private:
-  std::priority_queue <Edge, std::vector<Edge>, Compare> pq;
+  std::vector<Edge> edges;
 
+  // return index into edges of the min edge
+  int get_min_idx(void) {
+    int min_val = INT_MAX;
+    int min_idx = 0;
+    for (int i = 0; i < edges.size(); i++) {
+      if (edges[i].getVal() < min_val) {
+        min_val = edges[i].getVal();
+        min_idx = i;
+      }
+    }
+    return min_idx;
+  }
 };
