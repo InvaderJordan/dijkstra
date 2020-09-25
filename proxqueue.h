@@ -11,6 +11,13 @@ public:
   inline int getVal(void) const {return val;}
   inline int getX(void) const {return x;}
   inline int getY(void) const {return y;}
+  inline void setVal(int v) {val = v;}
+
+  friend std::ostream& operator<<(std::ostream& os, const Edge& e) {
+    std::cout << "(" << e.x << "," << e.y << "): " << e.val;
+
+    return os;
+  }
 
 protected:
   int x;
@@ -43,6 +50,14 @@ public:
     return false;
   }
 
+  void modify(Edge e) {
+    for (auto itr : edges) {
+      if (itr.getX() == e.getX() && itr.getY() == e.getY()) {
+        itr.setVal(e.getVal());
+      }
+    }
+  }
+
   Edge top(void) {
     int idx = get_min_idx();
     return edges[idx];
@@ -50,6 +65,14 @@ public:
 
   int size(void) {
     return edges.size();
+  }
+
+  friend std::ostream& operator<<(std::ostream& os, const ProxQueue& pq) {
+    for (int i = 0; i < pq.edges.size(); i++) {
+      std::cout << pq.edges[i] << std::endl;
+    }
+
+    return os;
   }
 
 private:

@@ -17,7 +17,10 @@ public:
         }
       }
     }
+    cout << endl;
   }
+
+  void shortest_path(Graph& g, int start, int finish);
 
 private:
 
