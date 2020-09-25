@@ -21,15 +21,15 @@ int main() {
   };
   Graph g(8);
 
-  //g.generate_edges(.5, 9);
-  g.set_edges(test);
+  g.generate_edges(.5, 9);
+  //g.set_edges(test);
   cout << g << endl;
 
   ShortestPath sp;
 
   sp.list_edges(g);
 
-  sp.shortest_path(g, 0, 8);
+  sp.shortest_path(g, 0, g.get_size() - 1);
 
   return 0;
 }

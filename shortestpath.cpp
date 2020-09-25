@@ -21,20 +21,17 @@ void ShortestPath::shortest_path(Graph& g, int start, int finish) {
     }
   }
 
-  cout << "Closed set: " << endl << closed_set << endl;
-  cout << "Open set: " << endl << open_set << endl;
-
   while (open_set.size() > 0) {
-    if (closed_set.contains(finish)) {
-      cout << "Finished!  Shortest path: " << closed_set.get_val(finish) << endl;
-      break;
-    }
-
     auto nextpath = open_set.minPriority();
     int nextnode = get<0>(nextpath);
     int nextval = get<1>(nextpath);
     closed_set.insert(nextnode, nextval);
     path.push_back(Edge(currnode, nextnode, nextval));
+
+    if (closed_set.contains(finish)) {
+      cout << "Finished!  Shortest path: " << closed_set.get_val(finish) << endl;
+      break;
+    }
 
     bool open_set_addition = false;
     for (int i = 0; i < g.get_size(); i++) {
@@ -61,8 +58,8 @@ void ShortestPath::shortest_path(Graph& g, int start, int finish) {
       path.pop_back();
     }
 
-    //cout << "Closed set: " << endl << closed_set << endl;
-    //cout << "Open set: " << endl << open_set << endl;
+    cout << "Closed set: " << endl << closed_set << endl;
+    cout << "Open set: " << endl << open_set << endl;
     cout << "Path: " << endl;
     for (auto itr : path) {
       cout << itr << endl;
@@ -70,9 +67,11 @@ void ShortestPath::shortest_path(Graph& g, int start, int finish) {
     cout << endl;
   }
 
-  cout << "Final Path: " << endl;
-  for (auto itr : path) {
-    cout << itr << endl;
+  if (open_set.size() > 0) {
+    cout << "Final Path: " << endl;
+    for (auto itr : path) {
+      cout << itr << endl;
+    }
+    cout << endl;
   }
-  cout << endl;
 }
