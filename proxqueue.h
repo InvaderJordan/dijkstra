@@ -1,3 +1,6 @@
+#ifndef PROXQUEUE_H
+#define PROXQUEUE_H
+
 #include <queue>
 
 class Edge {
@@ -65,3 +68,5 @@ private:
     return min_idx;
   }
 };
+
+#endif // PROXQUEUE_H

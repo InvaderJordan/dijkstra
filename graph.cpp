@@ -2,31 +2,9 @@
 #include <vector>
 #include <ctime>
 
-#include "proxqueue.h"
+#include "graph.h"
 
 using namespace std;
-
-class Graph {
-public:
-  Graph(int verticies):verts(verticies),edges(0) {}
-  ~Graph() {}
-
-  void generate_edges(double density, int edge_range);
-  void neighbors(int x);
-  friend ostream& operator<<(ostream& os, const Graph& g);
-
-  const int v(void) {return verts;}
-  int e(void) {return edges;}
-  int get_edge(int x, int y) {return conn_matrix[x][y];}
-  void add_edge(int x, int y, int e) {conn_matrix[x][y] = conn_matrix[y][x] = e;}
-  void delete_edge(int x, int y) {conn_matrix[x][y] = conn_matrix[y][x] = 0;}
-
-
-private:
-  const int verts;
-  int edges;
-  vector<vector <int> > conn_matrix;
-};
 
 ostream& operator<<(ostream& os, const Graph& g) {
   for (int i = 0; i < g.conn_matrix.size(); i++) {
@@ -64,14 +42,4 @@ void Graph::generate_edges(double density, int edge_range) {
       }
     }
   }
-}
-
-
-int main() {
-  Graph g(10);
-
-  g.generate_edges(.25, 9);
-  cout << g;
-
-  return 0;
 }
