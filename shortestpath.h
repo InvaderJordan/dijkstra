@@ -17,7 +17,7 @@ public:
         }
       }
     }
-    cout << endl;
+    std::cout << std::endl;
   }
 
   void shortest_path(Graph& g, int start, int finish);
