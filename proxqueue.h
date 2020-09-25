@@ -19,6 +19,10 @@ public:
     return os;
   }
 
+  friend bool operator==(const Edge& e1, const Edge& e2) {
+    return (e1.x == e2.x && e1.y == e2.y);
+  }
+
 protected:
   int x;
   int y;
@@ -58,6 +62,15 @@ public:
         std::get<1>(itr) = val;
       }
     }
+  }
+
+  int get_val(T e) {
+    for (auto itr : queue) {
+      if (std::get<0>(itr) == e) {
+        return std::get<1>(itr);
+      }
+    }
+    return -1;
   }
 
   std::tuple<T, int> top(void) {

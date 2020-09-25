@@ -16,6 +16,9 @@ public:
   void add_edge(int x, int y, int e) {conn_matrix[x][y] = conn_matrix[y][x] = e;}
   void delete_edge(int x, int y) {conn_matrix[x][y] = conn_matrix[y][x] = 0;}
   int get_size(void) {return conn_matrix.size();}
+  void set_edges(std::vector<std::vector <int> > v) {
+    conn_matrix = v;
+  }
 
 
 private:
